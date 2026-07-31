@@ -12,7 +12,7 @@
                         </div>
                         <div>
                             <h1 class="text-2xl font-bold text-[#1a1a1a] leading-tight">Welcome, {{ auth()->user()->name ?? 'Patient' }}</h1>
-                            <p class="text-xs font-bold text-gray-500 tracking-widest uppercase mt-0.5">Ontology-Based Health Recommendation</p>
+                            <p class="text-xs font-bold text-gray-500 tracking-widest uppercase mt-0.5">Ontology-Based Herb Recommendation</p>
                         </div>
                     </div>
                     <!-- How It Works Button -->

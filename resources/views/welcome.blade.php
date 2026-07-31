@@ -97,7 +97,13 @@
                                 <a href="{{ route('login') }}" class="text-green-100 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">Login</a>
                                 <a href="{{ route('register') }}" class="px-6 py-2.5 bg-green-700 hover:bg-green-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-green-900/40 transition-all uppercase tracking-widest">Sign Up Now</a>
                             @else
+                                <!-- Added a quick Logout button next to Dashboard -->
                                 <a href="{{ url('/dashboard') }}" class="px-6 py-2.5 bg-green-600/20 hover:bg-green-600/40 text-green-100 text-xs font-bold rounded-xl border border-green-500/30 transition-all">DASHBOARD</a>
+                                
+                                <form method="POST" action="{{ route('logout') }}" class="inline">
+                                    @csrf
+                                    <button type="submit" class="px-6 py-2.5 bg-red-600/80 hover:bg-red-600 text-white text-xs font-bold rounded-xl shadow-lg transition-all uppercase tracking-widest">LOG OUT</button>
+                                </form>
                             @endguest
                         @endif
                     </div>

@@ -6,8 +6,8 @@
          data-top-herbs-values='@json($topHerbsValues ?? [])'
          data-top-symptoms-labels='@json($topSymptomsLabels ?? [])'
          data-top-symptoms-values='@json($topSymptomsValues ?? [])'
-         data-topic-labels='@json($topicLabels ?? [])'
-         data-topic-values='@json($topicValues ?? [])'
+         data-topic-labels='@json($categoryLabels ?? [])'
+         data-topic-values='@json($categoryValues ?? [])'
          class="min-h-screen bg-[#05140b] text-[#f0fdf4] py-8 px-4 sm:px-8 lg:px-12">
         <div class="w-full space-y-8">
             
@@ -120,10 +120,10 @@
                     </div>
                 </div>
 
-                <!-- Top Consultation Topics (Pie Chart) -->
+                <!-- Top Health Category (Pie Chart) -->
                 <div class="bg-[#0b2114] p-8 rounded-3xl border border-[#1a3024] shadow-2xl">
                     <div class="flex justify-between items-start mb-8">
-                        <h3 class="font-bold text-white text-lg">Top Consultation Topics 🌿</h3>
+                        <h3 class="font-bold text-white text-lg">Top Health Category 🌿</h3>
                     </div>
                     <div class="h-[300px] flex items-center justify-center">
                         <canvas id="topicsChart"></canvas>
@@ -387,8 +387,8 @@
                         chartSymptoms.data.datasets[0].data = data.topSymptomsValues;
                         chartSymptoms.update();
 
-                        chartTopics.data.labels = data.topicLabels;
-                        chartTopics.data.datasets[0].data = data.topicValues;
+                        chartTopics.data.labels = data.categoryLabels;
+                        chartTopics.data.datasets[0].data = data.categoryValues;
                         chartTopics.update();
                     })
                     .catch(error => console.error('Error refreshing analytics:', error));

@@ -35,10 +35,22 @@
             </div>
         @endif
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            {{-- Main Content: Messages --}}
-            <div class="lg:col-span-8 space-y-16">
-            @forelse($messages as $msg)
+        @if($messages->isEmpty())
+            <div class="max-w-3xl mx-auto mt-8">
+                <div class="bg-white rounded-[4rem] p-16 sm:p-32 text-center border border-gray-100 shadow-2xl shadow-green-900/[0.05]">
+                    <div class="w-28 h-28 bg-[#f2f9f0] rounded-[2.5rem] flex items-center justify-center mx-auto mb-10 shadow-inner">
+                        <svg class="w-12 h-12 text-[#064e3b]/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
+                    </div>
+                    <h3 class="text-3xl font-serif font-bold text-[#0f2818] mb-6">Start a Consultation</h3>
+                    <p class="text-gray-400 max-w-md mx-auto leading-relaxed text-sm mb-12">Your health is our priority. Send us an inquiry about any symptoms or herbs, and our practitioners will provide professional guidance.</p>
+                    <a href="{{ route('contact') }}" class="inline-flex px-12 py-5 bg-[#064e3b] text-white text-[11px] font-black uppercase tracking-widest rounded-2xl hover:bg-[#08634a] transition-all shadow-2xl hover:-translate-y-1 active:scale-95">Send Your First Inquiry</a>
+                </div>
+            </div>
+        @else
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                {{-- Main Content: Messages --}}
+                <div class="lg:col-span-8 space-y-16">
+                @foreach($messages as $msg)
                 <div class="relative group">
                     <div class="bg-white rounded-3xl sm:rounded-[3.5rem] shadow-2xl shadow-green-900/[0.03] border border-gray-100 overflow-hidden transition-all duration-500 hover:shadow-green-900/[0.08]">
                         
@@ -146,16 +158,7 @@
                         </div>
                     </div>
                 </div>
-            @empty
-                <div class="bg-white rounded-[4rem] p-32 text-center border border-gray-100 shadow-2xl shadow-green-900/[0.05]">
-                    <div class="w-28 h-28 bg-[#f2f9f0] rounded-[2.5rem] flex items-center justify-center mx-auto mb-10 shadow-inner">
-                        <svg class="w-12 h-12 text-[#064e3b]/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
-                    </div>
-                    <h3 class="text-3xl font-serif font-bold text-[#0f2818] mb-6">Start a Consultation</h3>
-                    <p class="text-gray-400 max-w-md mx-auto leading-relaxed text-sm mb-12">Your health is our priority. Send us an inquiry about any symptoms or herbs, and our practitioners will provide professional guidance.</p>
-                    <a href="{{ route('contact') }}" class="inline-flex px-12 py-5 bg-[#064e3b] text-white text-[11px] font-black uppercase tracking-widest rounded-2xl hover:bg-[#08634a] transition-all shadow-2xl hover:-translate-y-1 active:scale-95">Send Your First Inquiry</a>
-                </div>
-            @endforelse
+                @endforeach
 
             @if($messages->hasPages())
                 <div class="pt-10 flex justify-center">
@@ -206,6 +209,7 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
 
     <script>

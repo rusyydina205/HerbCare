@@ -15,7 +15,11 @@ return new class extends Migration
             $table->text('reply')->nullable();
             $table->timestamp('replied_at')->nullable();
             $table->boolean('is_read')->default(false);
-            $table->enum('status', ['pending', 'replied', 'resolved'])->default('pending')->change();
+            $table->dropColumn('status');
+        });
+
+        Schema::table('messages', function (Blueprint $table) {
+            $table->enum('status', ['pending', 'replied', 'resolved'])->default('pending');
         });
     }
 
@@ -26,7 +30,11 @@ return new class extends Migration
     {
         Schema::table('messages', function (Blueprint $table) {
             $table->dropColumn(['reply', 'replied_at', 'is_read']);
-            $table->enum('status', ['pending', 'completed'])->default('pending')->change();
+            $table->dropColumn('status');
+        });
+        
+        Schema::table('messages', function (Blueprint $table) {
+            $table->enum('status', ['pending', 'completed'])->default('pending');
         });
     }
 };

@@ -63,6 +63,22 @@ test('users can not authenticate with invalid password', function () {
     $this->assertGuest();
 });
 
+test('home page keeps login and sign up actions instead of dashboard for authenticated visitors', function () {
+    $patient = Patient::create([
+        'name' => 'Test Patient',
+        'email' => 'patient@test.com',
+        'phone' => '1234567890',
+        'password' => Hash::make('password'),
+    ]);
+
+    $response = $this->actingAs($patient, 'web')->get('/');
+
+    $response->assertOk();
+    $response->assertSee('Login');
+    $response->assertSee('Sign Up Now');
+    $response->assertDontSee('DASHBOARD');
+});
+
 test('patients can logout', function () {
     $patient = Patient::create([
         'name' => 'Test Patient',

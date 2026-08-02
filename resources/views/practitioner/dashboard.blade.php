@@ -8,14 +8,14 @@
                 </h2>
             </div>
             <div class="flex items-center gap-4">
-                @if($newMessagesCount > 0)
-                    <a href="{{ route('practitioner.messages.index') }}" class="relative inline-flex items-center justify-center w-14 h-14 bg-amber-500 text-[#064e3b] rounded-2xl hover:bg-amber-400 transition-all shadow-xl hover:-translate-y-0.5 active:scale-95 group animate-bounce hover:animate-none" title="You have {{ $newMessagesCount }} new patient inquiries">
+                @if(($newMessagesCount ?? 0) > 0)
+                    <a href="{{ route('practitioner.messages.index') }}" class="relative inline-flex items-center justify-center w-14 h-14 bg-amber-500 text-[#064e3b] rounded-2xl hover:bg-amber-400 transition-all shadow-xl hover:-translate-y-0.5 active:scale-95 group animate-bounce hover:animate-none" title="You have {{ $newMessagesCount ?? 0 }} new patient inquiries">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
                         </svg>
                         <span class="absolute -top-1 -right-1 flex h-5 w-5">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-5 w-5 bg-white text-[9px] font-black items-center justify-center text-[#064e3b]">{{ $newMessagesCount }}</span>
+                            <span class="relative inline-flex rounded-full h-5 w-5 bg-white text-[9px] font-black items-center justify-center text-[#064e3b]">{{ $newMessagesCount ?? 0 }}</span>
                         </span>
                     </a>
                 @else
@@ -45,7 +45,7 @@
             />
             <x-practitioner-stat-card 
                 title="Total Consultations" 
-                :value="$totalConsultations" 
+                :value="$totalConsultations ?? 0" 
                 label="Total Consultations" 
                 icon="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
                 trend="+12%"
@@ -53,10 +53,10 @@
             />
             <x-practitioner-stat-card 
                 title="Pending Inquiries" 
-                :value="$newMessagesCount" 
+                :value="$newMessagesCount ?? 0" 
                 label="Awaiting Professional Reply" 
                 icon="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-                :is-alert="$newMessagesCount > 0"
+                :is-alert="($newMessagesCount ?? 0) > 0"
                 accent="pink"
             />
         </div>

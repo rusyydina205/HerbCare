@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
 
-# Run Laravel database migrations
-# This will automatically create your tables in Render's database when it starts
+# Run Laravel database migrations & seeders
 php artisan migrate --force
+php artisan db:seed --force
 
 # Start the Apache web server in the foreground
 apache2-foreground

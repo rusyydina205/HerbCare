@@ -15,5 +15,4 @@ INSERT INTO `practitioners` (`practitionerId`, `name`, `email`, `password`, `pho
 
 INSERT INTO `messages` (`messageId`, `patientId`, `practitionerId`, `subject`, `message`, `status`, `created_at`, `updated_at`, `reply`, `replied_at`, `is_read`) VALUES
 (1, 4, NULL, 'consultation herbs', 'if i bloated what herbs suitable for my stomach', 'resolved', '2026-05-12 21:02:07', '2026-05-12 21:38:59', 'Ginger\r\nGood for bloating, nausea, and indigestion.\r\nTry: ginger tea or a few slices in hot water.\r\nPeppermint\r\nMay help relax stomach muscles and reduce gas.\r\nTry: peppermint tea.\r\nAvoid if you often get acid reflux/heartburn, since it can worsen that.', '2026-05-12 21:38:03', 1),
-(2, 2, NULL, 'consultation herbs', 'i want to make drink tea can u suggest herbal', 'pending', '2026-05-12 21:03:48', '2026-05-12 21:03:48', NULL, NULL, 0),
 (3, 3, NULL, 'consultation herbs', 'i get red rashes in my body which herb suitable to use', 'replied', '2026-05-12 21:36:53', '2026-05-12 21:37:26', 'Turmeric\r\nHas anti-inflammatory properties; usually taken in food/tea rather than applied directly (it can stain skin).', '2026-05-12 21:37:26', 0);

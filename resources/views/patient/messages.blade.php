@@ -47,9 +47,7 @@
                 </div>
             </div>
         @else
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                {{-- Main Content: Messages --}}
-                <div class="lg:col-span-8 space-y-16">
+            <div class="space-y-16">
                 @foreach($messages as $msg)
                 <div class="relative group">
                     <div class="bg-white rounded-3xl sm:rounded-[3.5rem] shadow-2xl shadow-green-900/[0.03] border border-gray-100 overflow-hidden transition-all duration-500 hover:shadow-green-900/[0.08]">
@@ -168,46 +166,7 @@
         </div>
             </div>
 
-            {{-- Sidebar: Active Practitioners --}}
-            <div class="lg:col-span-4 space-y-8">
-                <div class="bg-white rounded-[2.5rem] p-8 border border-gray-100 shadow-2xl shadow-green-900/[0.03]">
-                    <div class="flex items-center gap-4 mb-8">
-                        <div class="w-12 h-12 bg-green-50 rounded-2xl flex items-center justify-center text-[#064e3b] shadow-sm">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-serif font-bold text-[#0f2818]">Our Practitioners</h3>
-                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-0.5">Ready to assist you</p>
-                        </div>
-                    </div>
 
-                    <div class="space-y-5">
-                        @foreach($practitioners as $practitioner)
-                            <div class="group flex items-center justify-between p-4 rounded-2xl hover:bg-[#f2f9f0] border border-transparent hover:border-[#e0efdb] transition-all">
-                                <div class="flex items-center gap-4">
-                                    <div class="relative">
-                                        @if($practitioner->profile_photo)
-                                            <img src="{{ asset('profile_photos/' . $practitioner->profile_photo) }}" alt="{{ $practitioner->name }}" class="w-12 h-12 rounded-xl object-cover shadow-sm">
-                                        @else
-                                            <div class="w-12 h-12 bg-[#064e3b] text-white rounded-xl flex items-center justify-center font-bold shadow-sm">
-                                                {{ strtoupper(substr($practitioner->name, 0, 2)) }}
-                                            </div>
-                                        @endif
-                                        <div class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></div>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-sm font-bold text-[#0f2818] group-hover:text-[#064e3b] transition-colors">{{ $practitioner->name }}</h4>
-                                        <p class="text-[11px] font-medium text-gray-500 flex items-center gap-1 mt-0.5">
-                                            <svg class="w-3 h-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                            {{ $practitioner->messages_count }} Consultations Replied
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
         </div>
         @endif
     </div>

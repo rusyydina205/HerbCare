@@ -65,6 +65,7 @@ Route::middleware(['auth:practitioner', 'verified', \App\Http\Middleware\EnsureI
     })->name('messages.adriana');
     Route::post('/messages/{id}/reply', [PractitionerController::class, 'replyToMessage'])->name('messages.reply');
     Route::patch('/messages/{id}/status', [PractitionerController::class, 'updateMessageStatus'])->name('messages.status');
+    Route::delete('/messages/{id}', [PractitionerController::class, 'messagesDestroy'])->name('messages.destroy');
 
     // Profile
     Route::get('/profile', [PractitionerController::class, 'profile'])->name('profile');

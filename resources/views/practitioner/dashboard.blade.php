@@ -4,7 +4,7 @@
             <div>
               
                 <h2 class="font-serif font-bold text-4xl text-white leading-tight">
-                    Welcome, Practitioner
+                    Welcome, {{ auth()->user()->name }}
                 </h2>
             </div>
             <div class="flex items-center gap-4">
@@ -199,7 +199,7 @@
                         <div class="space-y-4">
                             @forelse($recentMessages as $msg)
                                 <div class="border-l-2 border-white/20 pl-4 py-1">
-                                    <p class="text-[10px] font-black text-green-200/60 uppercase tracking-wide mb-1">{{ $msg->patient->name }}</p>
+                                    <p class="text-[10px] font-black text-green-200/60 uppercase tracking-wide mb-1">{{ $msg->patient?->name ?? 'Unknown Patient' }}</p>
                                     <p class="text-xs font-medium leading-relaxed line-clamp-1 opacity-80 italic">"{{ $msg->message }}"</p>
                                 </div>
                             @empty
@@ -278,15 +278,12 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                         <div class="relative">
                             <label class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-3 block">Category</label>
-                            <select name="categoryId" id="modal-categoryId" required class="w-full px-8 py-5 bg-gray-50 border-gray-100 rounded-2xl focus:bg-white focus:border-[#064e3b] focus:ring-[#064e3b] transition-all font-bold text-[#0f2818] appearance-none cursor-pointer">
+                            <select name="categoryId" id="modal-categoryId" required class="w-full px-8 py-5 bg-gray-50 border-gray-100 rounded-2xl focus:bg-white focus:border-[#064e3b] focus:ring-[#064e3b] transition-all font-bold text-[#0f2818] cursor-pointer">
                                 <option value="" disabled selected>Select Classification</option>
                                 @foreach(\App\Models\HealthCategory::all() as $cat)
                                     <option value="{{ $cat->categoryId }}">{{ $cat->categoryName }}</option>
                                 @endforeach
                             </select>
-                            <div class="absolute right-6 bottom-5 pointer-events-none text-gray-400">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                            </div>
                         </div>
                         <div>
                             <label class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-3 block">Image Path</label>
@@ -306,7 +303,7 @@
                             </div>
                             <div>
                                 <label class="text-[10px] font-black text-orange-400 uppercase tracking-[0.2em] mb-3 block">Safety & Warning</label>
-                                <textarea name="safety" id="modal-safety" rows="3" required class="w-full px-8 py-5 bg-orange-50 border-orange-100 rounded-[1.5rem] focus:bg-white focus:border-orange-500 focus:ring-orange-500 transition-all text-xs font-medium text-gray-600" placeholder="Contraindications..."></textarea>
+                                <textarea name="safety" id="modal-safety" rows="3" required class="w-full px-8 py-5 bg-gray-50 border-gray-100 rounded-[1.5rem] focus:bg-white focus:border-[#064e3b] focus:ring-[#064e3b] transition-all text-xs font-medium text-gray-600" placeholder="Contraindications..."></textarea>
                             </div>
                         </div>
                     </div>

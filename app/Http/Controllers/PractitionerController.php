@@ -284,6 +284,12 @@ class PractitionerController extends Controller
         return back()->with('success', 'Reply sent successfully!');
     }
 
+    public function messagesDestroy($id)
+    {
+        Message::destroy($id);
+        return back()->with('success', 'Message deleted successfully!');
+    }
+
     /**
      * Herbs CRUD
      */

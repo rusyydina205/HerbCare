@@ -7,7 +7,7 @@
                 </a>
                 <a href="{{ route('dashboard') }}" class="text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-400 hover:text-gray-600 transition-colors">Back to Dashboard</a>
             </div>
-            <div class="grid gap-8 lg:grid-cols-[1.45fr_1fr] items-center rounded-[2rem] bg-white p-8 shadow-sm border border-gray-200">
+            <div class="grid gap-8 lg:grid-cols-[1.75fr_1fr] items-center rounded-[2rem] bg-white p-8 shadow-sm border border-gray-200">
                 <div class="space-y-6">
                     <div class="inline-flex items-center rounded-full bg-[#eaf4e8] px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-[#0f2818]">Herb Library</div>
                     <div>
@@ -30,32 +30,28 @@
                         </label>
                         <button type="submit" class="rounded-[1.75rem] bg-[#064e3b] px-7 py-4 text-sm font-semibold text-white transition hover:bg-[#053d30]">Search</button>
                     </form>
-                    <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-                        <label class="block">
-                            <span class="sr-only">Filter by category</span>
-                            <select name="category" onchange="this.form.submit()" class="w-full rounded-[1.75rem] border border-gray-200 bg-white py-4 px-5 text-sm text-gray-700 shadow-sm focus:border-[#0f2818] focus:outline-none focus:ring-2 focus:ring-[#0f2818]/15">
-                                <option value="">All Categories</option>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->categoryId }}" @selected((string)($selectedCategory ?? '') === (string)$category->categoryId)>{{ $category->categoryName }}</option>
-                                @endforeach
-                            </select>
-                        </label>
-                        <label class="block">
-                            <span class="sr-only">Sort herbs</span>
-                            <select name="sort" class="w-full rounded-[1.75rem] border border-gray-200 bg-white py-4 px-5 text-sm text-gray-700 shadow-sm focus:border-[#0f2818] focus:outline-none focus:ring-2 focus:ring-[#0f2818]/15">
-                                <option value="alphabetical" @selected(($sort ?? 'alphabetical') === 'alphabetical')>A - Z</option>
-                                <option value="az" @selected(($sort ?? '') === 'az')>A - Z</option>
-                                <option value="za" @selected(($sort ?? '') === 'za')>Z - A</option>
-                            </select>
-                        </label>
-                        <div class="flex items-center gap-3">
-                            <a href="{{ route('herb.library') }}" class="inline-flex items-center justify-center rounded-[1.75rem] border border-gray-200 bg-white px-5 py-4 text-sm font-semibold text-gray-700 transition hover:border-[#0f2818] hover:text-[#0f2818]">Clear</a>
-                            <span class="text-sm font-semibold text-gray-500">{{ $herbs->count() }} herbs found</span>
+
+                </div>
+                <div class="group relative rounded-[2rem] overflow-hidden shadow-sm h-64 lg:h-full min-h-[350px] max-h-[400px] border border-[#0f2818]/10 cursor-pointer">
+                    <!-- Background Image with Hover Scale -->
+                    <img src="{{ asset('images/many_herbs.png') }}" alt="A rich botanical collection of herbs" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    
+                    <!-- Dark Gradient Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-[#0f2818]/95 via-[#0f2818]/70 to-transparent transition-opacity duration-500 group-hover:opacity-90"></div>
+                    
+                    <!-- Text Content -->
+                    <div class="absolute inset-0 p-8 sm:p-10 flex flex-col justify-center">
+                        <span class="text-[11px] font-bold uppercase tracking-[0.25em] text-green-200/80 mb-3">Herb Library</span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white mb-3">Find peace in nature's healing herbs</h3>
+                        <p class="text-sm text-gray-200 max-w-[85%] mb-8 leading-relaxed">Explore a comprehensive library of traditional herbs, roots, and natural remedies curated for your well-being.</p>
+                        
+                        <div>
+                            <span class="inline-flex items-center gap-2.5 rounded-full bg-[#1b5e40] px-5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-white shadow-md transition-colors hover:bg-[#144a32]">
+                                <span class="h-2 w-2 rounded-full bg-green-300"></span>
+                                Browse Herbs Freely
+                            </span>
                         </div>
                     </div>
-                </div>
-                <div class="rounded-[2rem] overflow-hidden shadow-sm h-full min-h-[300px]">
-                    <img src="{{ asset('images/herb3.jpg') }}" alt="Herbs" class="w-full h-full object-cover">
                 </div>
             </div>
 
@@ -75,11 +71,11 @@
                             <img src="{{ asset($herb->image) }}" alt="{{ $herb->herbName }}" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
                         </div>
                         <div class="p-5 flex flex-col flex-grow">
-                            <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-                                <span class="inline-flex items-center rounded-full bg-[#eff6ee] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#064e3b]">{{ $herb->category->categoryName ?? 'General' }}</span>
-                                <span class="text-[11px] font-semibold text-gray-400">{{ \Illuminate\Support\Str::limit($herb->scientificName, 24) }}</span>
+                            <div class="mb-3">
+                                <span class="inline-flex items-center rounded-full bg-[#eff6ee] px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#064e3b]">{{ $herb->category->categoryName ?? 'General' }}</span>
                             </div>
-                            <h2 class="text-xl font-semibold text-[#0f2818] mb-2">{{ $herb->herbName }}</h2>
+                            <h2 class="text-xl font-bold text-[#0f2818] mb-1 truncate" title="{{ $herb->herbName }}">{{ $herb->herbName }}</h2>
+                            <p class="text-xs font-medium italic text-gray-400 mb-4 truncate" title="{{ $herb->scientificName }}">{{ $herb->scientificName ?: 'Botanical name' }}</p>
                             <p class="text-sm leading-relaxed text-gray-600 mb-6 flex-grow">{{ \Illuminate\Support\Str::limit($herb->benefits ?: 'A natural remedy with traditional benefits for wellbeing.', 110) }}</p>
                             <div class="mt-auto pt-4 border-t border-gray-100">
                                 <span class="flex w-full items-center justify-center gap-2 rounded-full bg-[#064e3b] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 group-hover:bg-[#053d30] group-hover:shadow-md group-hover:gap-3">

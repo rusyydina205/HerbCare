@@ -7,7 +7,7 @@ services:
   - type: web
     name: herbcare-app
     env: php
-    buildCommand: "composer install --no-dev --optimize-autoloader && npm install && npm run build"
+    buildCommand: "composer install --no-dev --optimize-autoloader && npm install && npm run build && php artisan migrate --force && php artisan db:seed --force && php artisan config:clear && php artisan view:clear"
     startCommand: "php artisan serve --host=0.0.0.0 --port=$PORT"
     envVars:
       - key: APP_ENV
@@ -16,6 +16,12 @@ services:
         value: true
       - key: APP_KEY
         value: base64:bcB9icqce16ZATl0OVkxSwIAldJcbfWGnk1qjHFtjUQ=
+      - key: CACHE_STORE
+        value: file
+      - key: SESSION_DRIVER
+        value: file
+      - key: QUEUE_CONNECTION
+        value: sync
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_HOST

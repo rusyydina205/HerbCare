@@ -159,10 +159,10 @@
                             </div>
                         </div>
                         <div class="bg-white border border-gray-100 rounded-xl px-5 py-2.5 text-center shadow-sm shrink-0 self-stretch md:self-auto flex flex-col justify-center">
-                            <p class="text-[11px] font-bold text-gray-800 mb-1.5 uppercase tracking-wide">Confidence Level</p>
+                            <p class="text-[11px] font-bold text-gray-800 mb-1.5 uppercase tracking-wide">Score Matching Herbs</p>
                             <div class="flex items-center justify-center gap-1.5 text-[#10b981] font-bold text-sm bg-[#ecfdf5] px-3 py-1.5 rounded-md">
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                                High
+                                {{ $categoryMatchScore ?? 0 }}%
                             </div>
                         </div>
                     </div>

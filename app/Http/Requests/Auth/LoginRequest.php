@@ -45,19 +45,17 @@ class LoginRequest extends FormRequest
         $credentials = $this->only('email', 'password');
         $remember = $this->boolean('remember');
         $role = $this->input('role', 'patient');
+        $primaryGuard = ($role === 'practitioner') ? 'practitioner' : 'web';
+        $fallbackGuard = ($primaryGuard === 'practitioner') ? 'web' : 'practitioner';
 
-        if ($role === 'practitioner') {
-            // Only try Practitioner
-            if (Auth::guard('practitioner')->attempt($credentials, $remember)) {
-                RateLimiter::clear($this->throttleKey());
-                return;
-            }
-        } else {
-            // Only try Patient (web guard)
-            if (Auth::guard('web')->attempt($credentials, $remember)) {
-                RateLimiter::clear($this->throttleKey());
-                return;
-            }
+        if (Auth::guard($primaryGuard)->attempt($credentials, $remember)) {
+            RateLimiter::clear($this->throttleKey());
+            return;
+        }
+
+        if (Auth::guard($fallbackGuard)->attempt($credentials, $remember)) {
+            RateLimiter::clear($this->throttleKey());
+            return;
         }
 
         RateLimiter::hit($this->throttleKey());

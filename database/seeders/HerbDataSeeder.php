@@ -16,31 +16,31 @@ class HerbDataSeeder extends Seeder
     public function run(): void
     {
         // ── Health Categories (Journal-Accurate TCM Domains) ──
-        $sleep       = HealthCategory::create(['categoryName' => 'Immune system health']);
-        $respiratory = HealthCategory::create(['categoryName' => 'Respiratory health']);
-        $mental      = HealthCategory::create(['categoryName' => 'Stress/anxiety health']);
-        $digestive   = HealthCategory::create(['categoryName' => 'Digestive health']);
-        $menstrual   = HealthCategory::create(['categoryName' => 'Menstrual/productive health']);
+        $sleep       = HealthCategory::firstOrCreate(['categoryName' => 'Immune system health']);
+        $respiratory = HealthCategory::firstOrCreate(['categoryName' => 'Respiratory health']);
+        $mental      = HealthCategory::firstOrCreate(['categoryName' => 'Stress/anxiety health']);
+        $digestive   = HealthCategory::firstOrCreate(['categoryName' => 'Digestive health']);
+        $menstrual   = HealthCategory::firstOrCreate(['categoryName' => 'Menstrual/productive health']);
 
         // ── Symptoms ──
-        $insomnia   = Symptom::create(['symptomName' => 'Insomnia / Trouble Sleeping', 'categoryId' => $sleep->categoryId]);
-        $restless   = Symptom::create(['symptomName' => 'Mental Restlessness',   'categoryId' => $sleep->categoryId]);
-        $headache   = Symptom::create(['symptomName' => 'Headache',              'categoryId' => $sleep->categoryId]);
+        $insomnia   = Symptom::firstOrCreate(['symptomName' => 'Insomnia / Trouble Sleeping'], ['categoryId' => $sleep->categoryId]);
+        $restless   = Symptom::firstOrCreate(['symptomName' => 'Mental Restlessness'],   ['categoryId' => $sleep->categoryId]);
+        $headache   = Symptom::firstOrCreate(['symptomName' => 'Headache'],              ['categoryId' => $sleep->categoryId]);
         
-        $cough      = Symptom::create(['symptomName' => 'Persistent Cough',      'categoryId' => $respiratory->categoryId]);
-        $sorethroat = Symptom::create(['symptomName' => 'Sore Throat',           'categoryId' => $respiratory->categoryId]);
-        $fever      = Symptom::create(['symptomName' => 'Fever',                 'categoryId' => $respiratory->categoryId]);
+        $cough      = Symptom::firstOrCreate(['symptomName' => 'Persistent Cough'],      ['categoryId' => $respiratory->categoryId]);
+        $sorethroat = Symptom::firstOrCreate(['symptomName' => 'Sore Throat'],           ['categoryId' => $respiratory->categoryId]);
+        $fever      = Symptom::firstOrCreate(['symptomName' => 'Fever'],                 ['categoryId' => $respiratory->categoryId]);
         
-        $stress     = Symptom::create(['symptomName' => 'Stress & Anxiety',      'categoryId' => $mental->categoryId]);
-        $mood       = Symptom::create(['symptomName' => 'Irritability',          'categoryId' => $mental->categoryId]);
-        $fatigue    = Symptom::create(['symptomName' => 'Chronic Fatigue',       'categoryId' => $mental->categoryId]);
+        $stress     = Symptom::firstOrCreate(['symptomName' => 'Stress & Anxiety'],      ['categoryId' => $mental->categoryId]);
+        $mood       = Symptom::firstOrCreate(['symptomName' => 'Irritability'],          ['categoryId' => $mental->categoryId]);
+        $fatigue    = Symptom::firstOrCreate(['symptomName' => 'Chronic Fatigue'],       ['categoryId' => $mental->categoryId]);
         
-        $bloating   = Symptom::create(['symptomName' => 'Abdominal Bloating',    'categoryId' => $digestive->categoryId]);
-        $nausea     = Symptom::create(['symptomName' => 'Nausea / Morning Sickness', 'categoryId' => $digestive->categoryId]);
-        $vomiting   = Symptom::create(['symptomName' => 'Vomiting',              'categoryId' => $digestive->categoryId]);
+        $bloating   = Symptom::firstOrCreate(['symptomName' => 'Abdominal Bloating'],    ['categoryId' => $digestive->categoryId]);
+        $nausea     = Symptom::firstOrCreate(['symptomName' => 'Nausea / Morning Sickness'], ['categoryId' => $digestive->categoryId]);
+        $vomiting   = Symptom::firstOrCreate(['symptomName' => 'Vomiting'],              ['categoryId' => $digestive->categoryId]);
         
-        $cramps     = Symptom::create(['symptomName' => 'Menstrual Cramps',      'categoryId' => $menstrual->categoryId]);
-        $irregular  = Symptom::create(['symptomName' => 'Irregular Cycle',       'categoryId' => $menstrual->categoryId]);
+        $cramps     = Symptom::firstOrCreate(['symptomName' => 'Menstrual Cramps'],      ['categoryId' => $menstrual->categoryId]);
+        $irregular  = Symptom::firstOrCreate(['symptomName' => 'Irregular Cycle'],       ['categoryId' => $menstrual->categoryId]);
 
         // ── 20 Journal-Accurate Herbs ──
         $herbs = [
@@ -91,7 +91,7 @@ class HerbDataSeeder extends Seeder
                 'preparation'    => 'Cleaning: Rinse the dried leaves gently.. Preparation: Prepare your main decoction first.. Steeping: Add peppermint and steep for only 5 minutes at the very end of the decoction.',
                 'safety'         => 'Can dry up breast milk. Avoid if breastfeeding.',
                 'categoryId'     => $respiratory->categoryId,
-                'image'          => 'images/herb5.png',
+                'image'          => 'images/herb5.webp',
                 'symptoms'       => [$sorethroat->symptomId, $mood->symptomId],
             ],
             [
@@ -121,7 +121,7 @@ class HerbDataSeeder extends Seeder
                 'preparation'    => 'Preparation: Use large, high-quality slices.. Setup: Add to soups, broths, or tea formulas.. Cooking: Simmer for at least 1 hour to fully extract the beneficial properties.',
                 'safety'         => 'Avoid during the acute stage of a common cold or flu.',
                 'categoryId'     => $digestive->categoryId,
-                'image'          => 'images/herb9.jpg',
+                'image'          => 'images/herb9.webp',
                 'symptoms'       => [$bloating->symptomId, $fatigue->symptomId],
             ],
             [
@@ -131,7 +131,7 @@ class HerbDataSeeder extends Seeder
                 'preparation'    => 'Selection: Use honey-roasted (Zhi Gan Cao) for tonifying, or raw for clearing heat.. Setup: Add 3-6g to your formula.. Brewing: Standard simmering along with other herbs in the formula.',
                 'safety'         => 'Avoid long-term pure use if you have hypertension.',
                 'categoryId'     => $respiratory->categoryId,
-                'image'          => 'images/herb10.jpg',
+                'image'          => 'images/herb6 (2).jpg',
                 'symptoms'       => [$cough->symptomId],
             ],
             [
@@ -171,7 +171,7 @@ class HerbDataSeeder extends Seeder
                 'preparation'    => 'Rinsing: Briefly rinse the berries.. Usage: Can be eaten raw as a snack.. Steeping: Steep in hot water for 10 minutes to make a nourishing tea.',
                 'safety'         => 'Generally safe for all. Avoid in acute phlegm-heat stages.',
                 'categoryId'     => $sleep->categoryId,
-                'image'          => 'images/herb11.jpg',
+                'image'          => 'images/herb11.webp',
                 'symptoms'       => [$insomnia->symptomId],
             ],
             [
@@ -201,7 +201,7 @@ class HerbDataSeeder extends Seeder
                 'preparation'    => 'Selection: Use high-quality dried flowers.. Setup: Place in a teapot, often combined with Goji berries.. Steeping: Steep with boiling water for 5-10 minutes.',
                 'safety'         => 'Avoid if allergic to ragweed/daisies.',
                 'categoryId'     => $mental->categoryId,
-                'image'          => 'images/herb7.webp',
+                'image'          => 'images/herb7.jpg',
                 'symptoms'       => [$mood->symptomId, $headache->symptomId],
             ],
             [
@@ -211,7 +211,7 @@ class HerbDataSeeder extends Seeder
                 'preparation'    => 'Processing: Use dry-fried or bran-fried form to increase efficiency.. Setup: Add to the main herbal formula.. Decoction: Decoct for 30 minutes.',
                 'safety'         => 'Contraindicated with severe Yin deficiency/thirst.',
                 'categoryId'     => $digestive->categoryId,
-                'image'          => 'images/herb10 copy.jpg',
+                'image'          => 'images/herb20.webp',
                 'symptoms'       => [$nausea->symptomId, $bloating->symptomId],
             ],
             [
@@ -231,7 +231,7 @@ class HerbDataSeeder extends Seeder
                 'preparation'    => 'Cleaning: Rinse the rhizome.. Setup: Often paired with Chai Hu or other Qi-regulating herbs.. Decoction: Decoct for 30 minutes.',
                 'safety'         => 'Use with caution if there is Heat in the Blood.',
                 'categoryId'     => $mental->categoryId,
-                'image'          => 'images/herb12.png',
+                'image'          => 'images/herb12.jpg',
                 'symptoms'       => [$stress->symptomId, $irregular->symptomId],
             ],
             [
@@ -250,13 +250,14 @@ class HerbDataSeeder extends Seeder
             $symptomIds = $herbData['symptoms'];
             unset($herbData['symptoms']);
 
-            $herb = Herb::create($herbData);
+            $herb = Herb::firstOrCreate(['herbName' => $herbData['herbName']], $herbData);
 
             foreach ($symptomIds as $symptomId) {
                 $symptom = Symptom::find($symptomId);
-                HerbSymptom::create([
-                    'herbId'     => $herb->herbId,
-                    'symptomId'  => $symptomId,
+                HerbSymptom::firstOrCreate([
+                    'herbId'    => $herb->herbId,
+                    'symptomId' => $symptomId,
+                ], [
                     'categoryId' => $symptom->categoryId,
                 ]);
             }
@@ -265,17 +266,19 @@ class HerbDataSeeder extends Seeder
         // ── Create Default Users (Independent Auth Tables) ──
         
         // Practitioner
-        Practitioner::create([
+        Practitioner::firstOrCreate([
+            'email' => 'practitioner@herbcare.com'
+        ], [
             'name'     => 'Kien Fatt Medical Store',
-            'email'    => 'practitioner@herbcare.com',
             'password' => Hash::make('password'),
             'phone'    => '+60 17-218 5428'
         ]);
 
         // Patient
-        Patient::create([
+        Patient::firstOrCreate([
+            'email' => 'patient@herbcare.com'
+        ], [
             'name'     => 'Sample Patient',
-            'email'    => 'patient@herbcare.com',
             'password' => Hash::make('password'),
             'phone'    => '+60 12-3456789'
         ]);

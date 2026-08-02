@@ -165,7 +165,7 @@
                         <div class="space-y-4">
                             @forelse($recentMessages as $msg)
                                 <div class="border-l-2 border-[#10b981] pl-4 py-3">
-                                    <p class="text-[10px] uppercase tracking-widest text-green-200 font-black">{{ $msg->patient->name }}</p>
+                                    <p class="text-[10px] uppercase tracking-widest text-green-200 font-black">{{ $msg->patient?->name ?? 'Unknown Patient' }}</p>
                                     <p class="text-sm font-bold text-white leading-tight">{{ $msg->subject }}</p>
                                     <p class="text-[11px] text-gray-300 leading-relaxed line-clamp-2">{{ $msg->message }}</p>
                                     <p class="text-[10px] text-gray-500 mt-2">{{ $msg->created_at->format('M d, Y g:ia') }} • {{ ucfirst($msg->status) }}</p>

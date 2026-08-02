@@ -105,6 +105,7 @@ class DashboardController extends Controller
         }
 
         $detectedCategory = null;
+        $categoryMatchScore = 0;
         if (!empty($selectedSymptoms)) {
             $categoryCounts = \App\Models\Symptom::whereIn('symptomId', $selectedSymptoms)
                 ->whereNotNull('categoryId')
@@ -115,10 +116,11 @@ class DashboardController extends Controller
                 
             if ($categoryCounts) {
                 $detectedCategory = \App\Models\HealthCategory::find($categoryCounts->categoryId);
+                $categoryMatchScore = min(100, round(($categoryCounts->count / count($selectedSymptoms)) * 100));
             }
         }
 
-        return view('dashboard', compact('herbs', 'categories', 'symptoms', 'selectedSymptoms', 'popularHerbs', 'detectedCategory'));
+        return view('dashboard', compact('herbs', 'categories', 'symptoms', 'selectedSymptoms', 'popularHerbs', 'detectedCategory', 'categoryMatchScore'));
     }
 
     /**

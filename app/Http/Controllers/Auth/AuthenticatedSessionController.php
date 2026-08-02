@@ -28,8 +28,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        $role = $request->input('role', 'patient');
-        if ($role === 'practitioner') {
+        if (Auth::guard('practitioner')->check()) {
             return redirect()->route('practitioner.dashboard');
         }
 

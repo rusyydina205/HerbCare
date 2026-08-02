@@ -54,18 +54,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="rounded-[2rem] bg-[#064e3b] p-8 shadow-sm border border-[#0f2818]">
-                    <div class="flex h-full flex-col justify-between rounded-[1.75rem] bg-[#0f291a]/95 p-6 shadow-inner">
-                        <div>
-                            <p class="text-sm font-semibold uppercase tracking-[0.3em] text-green-100/80">Herb Library</p>
-                            <h2 class="mt-4 text-3xl font-semibold text-white">A darker browsing experience</h2>
-                            <p class="mt-3 text-sm text-green-100 leading-relaxed">No featured herb image — just the cards and search tools you need to explore the library.</p>
-                        </div>
-                        <div class="mt-6 inline-flex items-center gap-3 rounded-full bg-green-800 px-4 py-3 text-xs font-semibold uppercase tracking-[0.25em] text-white">
-                            <span class="inline-block h-2 w-2 rounded-full bg-white"></span>
-                            Browse herbs freely
-                        </div>
-                    </div>
+                <div class="rounded-[2rem] overflow-hidden shadow-sm h-full min-h-[300px]">
+                    <img src="{{ asset('images/herb3.jpg') }}" alt="Herbs" class="w-full h-full object-cover">
                 </div>
             </div>
 

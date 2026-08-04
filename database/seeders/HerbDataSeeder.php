@@ -428,6 +428,15 @@ class HerbDataSeeder extends Seeder
                 'is_read' => 0,
                 'status'  => 'replied',
             ],
+            [
+                'patient_email' => 'putri@gmail.com',
+                'subject' => 'Menstrual Cramps Relief',
+                'message' => 'I experience painful menstrual cramps every month. Which herbs are recommended for pain relief?',
+                'reply'   => null,
+                'replied_at' => null,
+                'is_read' => 0,
+                'status'  => 'pending',
+            ],
         ];
 
         foreach ($messagesData as $mData) {

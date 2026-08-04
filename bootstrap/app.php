@@ -12,6 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->trustProxies(at: '*');
+        $middleware->validateCsrfTokens(except: [
+            'logout',
+        ]);
         $middleware->redirectTo(
             guests: function ($request) {
                 if ($request->is('practitioner*') || str_contains($request->headers->get('referer', ''), 'practitioner')) {
@@ -24,7 +27,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function (\Illuminate\Session\TokenMismatchException $e, $request) {
             // Handle session expiration during logout attempts
-            if ($request->is('logout')) {
+            if ($request->is('logout') || $request->path() === 'logout') {
                 \Illuminate\Support\Facades\Auth::guard('web')->logout();
                 \Illuminate\Support\Facades\Auth::guard('practitioner')->logout();
                 $request->session()->invalidate();

@@ -48,6 +48,8 @@ class LoginRequest extends FormRequest
         $primaryGuard = ($role === 'practitioner') ? 'practitioner' : 'web';
         $fallbackGuard = ($primaryGuard === 'practitioner') ? 'web' : 'practitioner';
 
+        Auth::guard($fallbackGuard)->logout();
+
         if (Auth::guard($primaryGuard)->attempt($credentials, $remember)) {
             RateLimiter::clear($this->throttleKey());
             return;

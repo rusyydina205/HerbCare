@@ -16,7 +16,8 @@ class EnsureIsPractitioner
     public function handle(Request $request, Closure $next): Response
     {
         if (! \Illuminate\Support\Facades\Auth::guard('practitioner')->check()) {
-            return redirect()->route('login');
+            return redirect()->route('login', ['role' => 'practitioner'])
+                ->with('status', 'Please sign in as a practitioner to access this page.');
         }
 
         return $next($request);

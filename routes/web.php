@@ -13,7 +13,7 @@ Route::get('/', function () {
 Route::get('/contact', [DashboardController::class, 'contact'])->name('contact');
 
 // Shared authentication routes (Dashboard and Herb details)
-Route::middleware(['auth:web,practitioner', 'verified'])->group(function () {
+Route::middleware(['auth:web,practitioner'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/herb-library', [DashboardController::class, 'library'])->name('herb.library');
     Route::get('/history', [DashboardController::class, 'history'])->name('patient.history');
@@ -35,7 +35,7 @@ Route::middleware('auth:web,practitioner')->group(function () {
 require __DIR__.'/auth.php';
 
 // Practitioner Management Routes
-Route::middleware(['auth:practitioner', 'verified', \App\Http\Middleware\EnsureIsPractitioner::class])->prefix('practitioner')->name('practitioner.')->group(function () {
+Route::middleware(['auth:practitioner', \App\Http\Middleware\EnsureIsPractitioner::class])->prefix('practitioner')->name('practitioner.')->group(function () {
     Route::get('/dashboard', [PractitionerController::class, 'index'])->name('dashboard');
     Route::get('/analytics', [PractitionerController::class, 'analytics'])->name('analytics');
     Route::get('/analytics/data', [PractitionerController::class, 'analyticsData'])->name('analytics.data');

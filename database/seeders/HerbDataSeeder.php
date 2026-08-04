@@ -9,6 +9,7 @@ use App\Models\Symptom;
 use App\Models\HerbSymptom;
 use App\Models\Practitioner;
 use App\Models\Patient;
+use App\Models\Message;
 use Illuminate\Support\Facades\Hash;
 
 class HerbDataSeeder extends Seeder
@@ -263,24 +264,165 @@ class HerbDataSeeder extends Seeder
             }
         }
 
-        // ── Create Default Users (Independent Auth Tables) ──
-        
-        // Practitioner
-        Practitioner::firstOrCreate([
-            'email' => 'practitioner@herbcare.com'
-        ], [
-            'name'     => 'Kien Fatt Medical Store',
-            'password' => Hash::make('password'),
-            'phone'    => '+60 17-218 5428'
-        ]);
+        // ── Create Practitioners ──
+        $practitionersData = [
+            [
+                'email' => 'alya@gmail.com',
+                'name'  => 'alya',
+                'phone' => null,
+                'password' => Hash::make('password'),
+            ],
+            [
+                'email' => 'cheeyat@gmail.com',
+                'name'  => 'CheeYat',
+                'phone' => null,
+                'password' => Hash::make('password'),
+            ],
+            [
+                'email' => 'hamzah@gmail.com',
+                'name'  => 'Dr hamzah',
+                'phone' => '01126262850',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'email' => 'practitioner@herbcare.com',
+                'name'  => 'Kien Fatt Medical Store',
+                'phone' => '+60 17-218 5428',
+                'password' => Hash::make('password'),
+            ],
+        ];
 
-        // Patient
-        Patient::firstOrCreate([
-            'email' => 'patient@herbcare.com'
-        ], [
-            'name'     => 'Sample Patient',
-            'password' => Hash::make('password'),
-            'phone'    => '+60 12-3456789'
-        ]);
+        foreach ($practitionersData as $pData) {
+            Practitioner::firstOrCreate(['email' => $pData['email']], $pData);
+        }
+
+        // ── Create Patients ──
+        $patientsData = [
+            [
+                'email' => 'raisha@gmail.com',
+                'name'  => 'raisha',
+                'phone' => '01126262850',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'email' => 'aisyah@gmail.com',
+                'name'  => 'aisyah',
+                'phone' => '0126545622',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'email' => 'adriana@gmail.com',
+                'name'  => 'adriana',
+                'phone' => '0107663253',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'email' => 'putri@gmail.com',
+                'name'  => 'putri sara',
+                'phone' => '12345678',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'email' => 'hidayat@gmail.com',
+                'name'  => 'hidayat',
+                'phone' => '01126262850',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'email' => 'rinazrusy@gmail.com',
+                'name'  => 'rusydina',
+                'phone' => '0126075622',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'email' => 'amiera@gmail.com',
+                'name'  => 'amiera',
+                'phone' => '0126584633',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'email' => 'patient@herbcare.com',
+                'name'  => 'Sample Patient',
+                'phone' => '+60 12-3456789',
+                'password' => Hash::make('password'),
+            ],
+        ];
+
+        $createdPatients = [];
+        foreach ($patientsData as $pData) {
+            $patient = Patient::firstOrCreate(['email' => $pData['email']], $pData);
+            $createdPatients[$pData['email']] = $patient->patientId;
+        }
+
+        // ── Create Real Messages / Consultations ──
+        $messagesData = [
+            [
+                'patient_email' => 'aisyah@gmail.com',
+                'subject' => 'consultation herbs',
+                'message' => 'if i bloated what herbs suitable for my stomach',
+                'reply'   => "Ginger\nGood for bloating, nausea, and indigestion.\nTry: ginger tea or a few slices in hot water.\nPeppermint\nMay help relax stomach muscles and reduce gas.\nTry: peppermint tea.\nAvoid if you often get acid reflux/heartburn, since it can worsen that.",
+                'replied_at' => '2026-05-12 21:38:03',
+                'is_read' => 1,
+                'status'  => 'resolved',
+            ],
+            [
+                'patient_email' => 'raisha@gmail.com',
+                'subject' => 'consultation herbs',
+                'message' => 'i get red rashes in my body which herb suitable to use',
+                'reply'   => "Turmeric\nHas anti-inflammatory properties; usually taken in food/tea rather than applied directly (it can stain skin).",
+                'replied_at' => '2026-05-12 21:37:26',
+                'is_read' => 0,
+                'status'  => 'replied',
+            ],
+            [
+                'patient_email' => 'adriana@gmail.com',
+                'subject' => 'Frequent Headaches',
+                'message' => 'i have headache that makes me cannot sleep what i should do and what herbs should take need a guidance too',
+                'reply'   => null,
+                'replied_at' => null,
+                'is_read' => 0,
+                'status'  => 'pending',
+            ],
+            [
+                'patient_email' => 'rinazrusy@gmail.com',
+                'subject' => 'stomach ache',
+                'message' => 'Hi, I often have stomach bloating after meals. May I know which herbs are suitable for improving digestion?',
+                'reply'   => 'Ginger and Hawthorn are often recommended to support digestion and reduce bloating. Avoid overeating and oily foods.',
+                'replied_at' => '2026-08-02 15:48:12',
+                'is_read' => 0,
+                'status'  => 'resolved',
+            ],
+            [
+                'patient_email' => 'hidayat@gmail.com',
+                'subject' => 'stress consulting',
+                'message' => 'i feel stressed and anxious recently. What do you suggest?',
+                'reply'   => null,
+                'replied_at' => null,
+                'is_read' => 0,
+                'status'  => 'pending',
+            ],
+            [
+                'patient_email' => 'amiera@gmail.com',
+                'subject' => 'herbal for pregnant women',
+                'message' => 'Are these all herbal recommendations safe for pregnant women?',
+                'reply'   => 'Not all herbs are suitable during pregnancy. Please consult a healthcare professional before using any herbal medicine.',
+                'replied_at' => '2026-08-02 15:53:41',
+                'is_read' => 0,
+                'status'  => 'replied',
+            ],
+        ];
+
+        foreach ($messagesData as $mData) {
+            $patientEmail = $mData['patient_email'];
+            unset($mData['patient_email']);
+            if (isset($createdPatients[$patientEmail])) {
+                $mData['patientId'] = $createdPatients[$patientEmail];
+                Message::firstOrCreate([
+                    'patientId' => $mData['patientId'],
+                    'subject'   => $mData['subject'],
+                    'message'   => $mData['message'],
+                ], $mData);
+            }
+        }
     }
 }

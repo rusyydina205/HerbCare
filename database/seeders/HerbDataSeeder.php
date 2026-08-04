@@ -293,7 +293,7 @@ class HerbDataSeeder extends Seeder
         ];
 
         foreach ($practitionersData as $pData) {
-            Practitioner::firstOrCreate(['email' => $pData['email']], $pData);
+            Practitioner::updateOrCreate(['email' => $pData['email']], $pData);
         }
 
         // ── Create Patients ──
@@ -350,7 +350,7 @@ class HerbDataSeeder extends Seeder
 
         $createdPatients = [];
         foreach ($patientsData as $pData) {
-            $patient = Patient::firstOrCreate(['email' => $pData['email']], $pData);
+            $patient = Patient::updateOrCreate(['email' => $pData['email']], $pData);
             $createdPatients[$pData['email']] = $patient->patientId;
         }
 
@@ -417,10 +417,9 @@ class HerbDataSeeder extends Seeder
             unset($mData['patient_email']);
             if (isset($createdPatients[$patientEmail])) {
                 $mData['patientId'] = $createdPatients[$patientEmail];
-                Message::firstOrCreate([
+                Message::updateOrCreate([
                     'patientId' => $mData['patientId'],
                     'subject'   => $mData['subject'],
-                    'message'   => $mData['message'],
                 ], $mData);
             }
         }

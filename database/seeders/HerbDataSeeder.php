@@ -270,25 +270,25 @@ class HerbDataSeeder extends Seeder
                 'email' => 'alya@gmail.com',
                 'name'  => 'alya',
                 'phone' => null,
-                'password' => Hash::make('12345678'),
+                'password' => Hash::make('password'),
             ],
             [
                 'email' => 'cheeyat@gmail.com',
                 'name'  => 'CheeYat',
                 'phone' => null,
-                'password' => Hash::make('12345678'),
+                'password' => Hash::make('password'),
             ],
             [
                 'email' => 'hamzah@gmail.com',
                 'name'  => 'Dr hamzah',
                 'phone' => '01126262850',
-                'password' => Hash::make('12345678'),
+                'password' => Hash::make('password'),
             ],
             [
                 'email' => 'practitioner@herbcare.com',
                 'name'  => 'Kien Fatt Medical Store',
                 'phone' => '+60 17-218 5428',
-                'password' => Hash::make('12345678'),
+                'password' => Hash::make('password'),
             ],
         ];
 
@@ -299,6 +299,12 @@ class HerbDataSeeder extends Seeder
         // ── Create Patients ──
         $patientsData = [
             [
+                'email' => 'rinazrusy@gmail.com',
+                'name'  => 'rusydina',
+                'phone' => '0126075622',
+                'password' => Hash::make('12345678'),
+            ],
+            [
                 'email' => 'raisha@gmail.com',
                 'name'  => 'raisha',
                 'phone' => '01126262850',
@@ -308,6 +314,24 @@ class HerbDataSeeder extends Seeder
                 'email' => 'aisyah@gmail.com',
                 'name'  => 'aisyah',
                 'phone' => '0126545622',
+                'password' => Hash::make('12345678'),
+            ],
+            [
+                'email' => 'mimie@gmail.com',
+                'name'  => 'mimie',
+                'phone' => '01126262850',
+                'password' => Hash::make('12345678'),
+            ],
+            [
+                'email' => 'athirah@gmail.com',
+                'name'  => 'Athirah',
+                'phone' => '0165432198',
+                'password' => Hash::make('12345678'),
+            ],
+            [
+                'email' => 'athirah12@gmail.com',
+                'name'  => 'Athirah',
+                'phone' => '0165432199',
                 'password' => Hash::make('12345678'),
             ],
             [
@@ -326,12 +350,6 @@ class HerbDataSeeder extends Seeder
                 'email' => 'hidayat@gmail.com',
                 'name'  => 'hidayat',
                 'phone' => '01126262850',
-                'password' => Hash::make('12345678'),
-            ],
-            [
-                'email' => 'rinazrusy@gmail.com',
-                'name'  => 'rusydina',
-                'phone' => '0126075622',
                 'password' => Hash::make('12345678'),
             ],
             [
